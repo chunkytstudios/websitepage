@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASHES OVER NEON — A Cyberpunk Multi-Sensory Experience</title>
+<meta name="description" content="Ashes Over Neon — a cyberpunk comic and original soundtrack. Launching September 9, 2026.">
+
+<!-- Open Graph for social sharing -->
+<meta property="og:title" content="ASHES OVER NEON">
+<meta property="og:description" content="A cyberpunk multi-sensory experience. Launching September 9, 2026.">
+<meta property="og:image" content="aon_cover.jpg">
+<meta property="og:url" content="https://ashesoverneon.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon placeholder -->
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D0D1A'/%3E%3Ctext y='75' x='50' text-anchor='middle' font-size='70' fill='%23ff3b9d' font-family='Arial Black'%3EA%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Fraunces:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #0D0D1A;
+  --bg2:     #16162a;
+  --text:    #f0e8f8;
+  --muted:   #8a829a;
+  --pink:    #ff3b9d;
+  --teal:    #3eede7;
+  --gold:    #b89420;
+  --border:  rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.04);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Fraunces', Georgia, serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* subtle scanlines */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(255,59,157,0.012) 3px, rgba(255,59,157,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* container */
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── TOP BAR ─────────────────────────────────────── */
+.topbar {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+.brand {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--pink);
+  animation: pulse 1.6s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.brand-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--pink);
+  text-transform: uppercase;
+}
+
+/* ─── HERO ─────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  padding: 60px 0 80px;
+  align-items: center;
+}
+
+.hero-art {
+  position: relative;
+  border: 1px solid var(--border);
+  background: #000;
+  aspect-ratio: 1077 / 1600;
+  overflow: hidden;
+}
+.hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.02) saturate(1.05);
+}
+.hero-art::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(13,13,26,0.4) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* corner brackets on the art */
+.hero-art .c { position: absolute; width: 22px; height: 22px; z-index: 3; }
+.hero-art .c.tl { top: -1px; left: -1px;  border-top: 2px solid var(--pink); border-left: 2px solid var(--pink); }
+.hero-art .c.tr { top: -1px; right: -1px; border-top: 2px solid var(--pink); border-right: 2px solid var(--pink); }
+.hero-art .c.bl { bottom: -1px; left: -1px;  border-bottom: 2px solid var(--pink); border-left: 2px solid var(--pink); }
+.hero-art .c.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--pink); border-right: 2px solid var(--pink); }
+
+/* hero text */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--pink);
+}
+
+.hero-title {
+  font-family: 'Rubik Dirt', sans-serif;
+  font-size: clamp(64px, 9vw, 110px);
+  line-height: 0.88;
+  letter-spacing: 2px;
+  color: var(--text);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.hero-title .ashes { color: var(--pink); display: block; }
+.hero-title .over-neon { color: var(--text); display: block; margin-top: 4px; }
+
+.hero-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--muted);
+  margin: 22px 0 30px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--pink);
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid var(--pink);
+  align-self: flex-start;
+  margin-bottom: 28px;
+}
+.hero-date-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--pink);
+  animation: pulse 1.4s ease infinite;
+}
+
+.hero-desc {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  max-width: 520px;
+  margin-bottom: 28px;
+  opacity: 0.85;
+}
+
+/* ─── PRIMARY CTAS ─────────────────────────────────── */
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  background: var(--pink);
+  color: #0a0a14;
+  text-decoration: none;
+  align-self: flex-start;
+  border: 1px solid var(--pink);
+  transition: all 0.2s;
+  margin-bottom: 14px;
+}
+.cta-primary:hover {
+  background: transparent;
+  color: var(--pink);
+  transform: translateX(4px);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: color 0.2s;
+}
+.cta-secondary:hover { color: var(--teal); }
+.cta-secondary::before { content: '→'; }
+
+/* ─── LINKS GRID ─────────────────────────────────────── */
+.links-section {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 36px;
+}
+.section-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--muted);
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: var(--text);
+  text-transform: uppercase;
+}
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 22px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent, var(--pink));
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  --accent: var(--pink);
+}
+.link-card:hover {
+  background: rgba(255,59,157,0.04);
+  transform: translateY(-2px);
+  border-left-width: 6px;
+}
+.link-card.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.link-card-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.link-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--text);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.link-card-desc {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+.link-card-status {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.link-card-arrow {
+  position: absolute;
+  top: 22px; right: 22px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+.link-card:hover .link-card-arrow { transform: translate(4px, -4px); opacity: 1; }
+
+/* color variants */
+.lc-pink { --accent: var(--pink); }
+.lc-teal { --accent: var(--teal); }
+.lc-gold { --accent: var(--gold); }
+
+/* ─── NEWSLETTER INLINE ─────────────────────────────── */
+.newsletter-box {
+  margin-top: 40px;
+  padding: 32px 28px;
+  border: 1px solid var(--pink);
+  background: rgba(255,59,157,0.03);
+  position: relative;
+}
+.newsletter-box .nc { position: absolute; width: 18px; height: 18px; }
+.newsletter-box .nc.tl { top:-1px; left:-1px;  border-top: 2px solid var(--pink); border-left: 2px solid var(--pink); }
+.newsletter-box .nc.tr { top:-1px; right:-1px; border-top: 2px solid var(--pink); border-right: 2px solid var(--pink); }
+.newsletter-box .nc.bl { bottom:-1px; left:-1px;  border-bottom: 2px solid var(--pink); border-left: 2px solid var(--pink); }
+.newsletter-box .nc.br { bottom:-1px; right:-1px; border-bottom: 2px solid var(--pink); border-right: 2px solid var(--pink); }
+
+.newsletter-eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.newsletter-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 3px;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.newsletter-desc {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  line-height: 1.6;
+  max-width: 580px;
+}
+.newsletter-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 12px 22px;
+  background: var(--pink);
+  color: #0a0a14;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.newsletter-cta:hover {
+  background: transparent;
+  color: var(--pink);
+  outline: 1px solid var(--pink);
+}
+
+/* ─── SOCIAL ROW ─────────────────────────────────────── */
+.social-section {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.social-eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.social-link {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.social-link:hover { color: var(--teal); }
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+footer {
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 2;
+}
+footer .signoff {
+  color: var(--pink);
+  margin-top: 8px;
+}
+
+/* ─── MOBILE ─────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 0 60px;
+  }
+  .hero-art {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .hero-text {
+    text-align: left;
+  }
+  .hero-title { font-size: clamp(58px, 16vw, 84px); }
+  .topbar { padding: 16px 20px; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .section-title { font-size: 22px; }
+  .newsletter-title { font-size: 26px; }
+}
+@media (max-width: 480px) {
+  .wrap { padding: 0 16px; }
+  .links-grid { grid-template-columns: 1fr; }
+  .hero-art { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <span>CHUNKY THUNDER STUDIOS</span>
+  </div>
+  <span class="brand-tag">// SIGNAL LIVE //</span>
+</div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-art">
+      <div class="c tl"></div>
+      <div class="c tr"></div>
+      <div class="c bl"></div>
+      <div class="c br"></div>
+      <img src="aon_cover.jpg" alt="Ashes Over Neon — cover art featuring the Gutter Punks band performing under neon lights">
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-eyebrow">A CYBERPUNK MULTI-SENSORY EXPERIENCE</div>
+
+      <h1 class="hero-title">
+        <span class="ashes">ASHES</span>
+        <span class="over-neon">OVER NEON</span>
+      </h1>
+
+      <p class="hero-sub">A comic. A soundtrack. A city the AI has been running for two hundred years.</p>
+
+      <div class="hero-date">
+        <div class="hero-date-dot"></div>
+        <span>LAUNCHING SEPTEMBER 9, 2026</span>
+      </div>
+
+      <p class="hero-desc">Four people the system failed. They found each other. The city has no idea what's coming.</p>
+
+      <a class="cta-primary" href="https://www.kickstarter.com/projects/ashesoverneon/ashes-over-neon-in-the-gutter-the-origin-story-book-0" target="_blank" rel="noopener">
+        Follow on Kickstarter →
+      </a>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section class="links-section">
+    <div class="section-head">
+      <span class="section-num">// 01</span>
+      <h2 class="section-title">Stay in the Signal</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="links-grid">
+
+      <!-- KICKSTARTER -->
+      <a class="link-card lc-pink" href="https://www.kickstarter.com/projects/ashesoverneon/ashes-over-neon-in-the-gutter-the-origin-story-book-0" target="_blank" rel="noopener">
+        <span class="link-card-tag">// CAMPAIGN</span>
+        <span class="link-card-title">Kickstarter</span>
+        <span class="link-card-desc">Click notify-me. Get there first when the campaign goes live.</span>
+        <span class="link-card-status">Launching September 9, 2026</span>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <!-- BANDCAMP -->
+      <a class="link-card lc-teal" href="https://ashesoverneon.bandcamp.com/album/pre-release-instrumentals" target="_blank" rel="noopener">
+        <span class="link-card-tag">// MUSIC</span>
+        <span class="link-card-title">Bandcamp</span>
+        <span class="link-card-desc">Pre-release instrumentals from the Gutter Punks. Listen now.</span>
+        <span class="link-card-status">Available now</span>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <!-- GUMROAD -->
+      <a class="link-card lc-gold" href="https://thunderchunky.gumroad.com/" target="_blank" rel="noopener">
+        <span class="link-card-tag">// SHOP</span>
+        <span class="link-card-title">Gumroad</span>
+        <span class="link-card-desc">Digital lore documents, character files, classified transmissions.</span>
+        <span class="link-card-status">Available now</span>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+      <!-- PATREON (disabled placeholder) -->
+      <div class="link-card lc-pink disabled">
+        <span class="link-card-tag">// PATRONS</span>
+        <span class="link-card-title">Patreon</span>
+        <span class="link-card-desc">Behind the curtain. In the signal. Part of the resistance.</span>
+        <span class="link-card-status">Coming soon — under review</span>
+        <span class="link-card-arrow">↗</span>
+      </div>
+
+      <!-- MERCH (disabled placeholder) -->
+      <div class="link-card lc-teal disabled">
+        <span class="link-card-tag">// MERCH</span>
+        <span class="link-card-title">Fourthwall</span>
+        <span class="link-card-desc">Apparel, accessories, and physical merchandise.</span>
+        <span class="link-card-status">Coming soon</span>
+        <span class="link-card-arrow">↗</span>
+      </div>
+
+      <!-- DEAD SIGNAL PODCAST -->
+      <a class="link-card lc-gold" href="https://open.spotify.com/show/" target="_blank" rel="noopener">
+        <span class="link-card-tag">// PODCAST</span>
+        <span class="link-card-title">Dead Signal</span>
+        <span class="link-card-desc">Intercepted transmissions from inside the city's blind spot.</span>
+        <span class="link-card-status">New episodes weekly</span>
+        <span class="link-card-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <!-- NEWSLETTER CTA -->
+    <div class="newsletter-box">
+      <div class="nc tl"></div>
+      <div class="nc tr"></div>
+      <div class="nc bl"></div>
+      <div class="nc br"></div>
+
+      <div class="newsletter-eyebrow">// SECTOR DISPATCH — NEWSLETTER</div>
+      <h3 class="newsletter-title">Get the Transmission</h3>
+      <p class="newsletter-desc">Every week. Classified files. Lore the public doesn't see. First access when the Kickstarter goes live. The city doesn't know the list exists.</p>
+      <a class="newsletter-cta" href="https://mailchi.mp/ffeff3cc6874/ashes-over-neon" target="_blank" rel="noopener">
+        Subscribe →
+      </a>
+    </div>
+  </section>
+
+  <!-- SOCIAL -->
+  <section class="social-section">
+    <div class="social-eyebrow">// FIND THE FREQUENCY</div>
+    <div class="social-row">
+      <a class="social-link" href="https://www.tiktok.com/@ashesoverneon" target="_blank" rel="noopener">TikTok</a>
+      <a class="social-link" href="https://www.instagram.com/chunkythunderstudios" target="_blank" rel="noopener">Instagram</a>
+      <a class="social-link" href="https://www.youtube.com/@CTHUNDERSTUDIOS" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div>© 2026 CHUNKY THUNDER STUDIOS, LLC · ALL RIGHTS RESERVED</div>
+  <div class="signoff">// STAY ON FREQUENCY //</div>
+</footer>
+
+</body>
+</html>
